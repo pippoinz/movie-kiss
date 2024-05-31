@@ -1,2 +1,3 @@
-# movie-kiss
-Simple evening film selector
+# Movie KISS (Keep It Simply Short)
+
+TODO
