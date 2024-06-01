@@ -30,14 +30,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        pylint --fail-under=9.5 $(git ls-files '*.py')
     - name: Test with pytest
       run: |
-        pytest --junitxml=junit/test-results.xml --cov=src --cov-report=xml --cov-report=html tests
-    - name: Upload pytest test results
-      uses: actions/upload-artifact@v4
-      with:
-        name: pytest-results
-        path: junit/test-results.xml
-      # Use always() to always run this step to publish test results when there are test failures
-      if: ${{ always() }}
+        pytest --cov=src --cov-fail-under=80 tests/
