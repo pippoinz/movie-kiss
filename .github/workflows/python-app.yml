@@ -33,4 +33,9 @@ jobs:
         pylint --fail-under=9.5 $(git ls-files '*.py')
     - name: Test with pytest
       run: |
-        pytest --cov=src tests/
+        pytest --cov=src --cov-report=xml tests/
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4.0.1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        fail_ci_if_error: true
