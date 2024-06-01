@@ -1,3 +1,7 @@
+"""
+This module contains unit tests for the Movie class.
+"""
+
 from src.domain.entities.movie import Movie
 
 

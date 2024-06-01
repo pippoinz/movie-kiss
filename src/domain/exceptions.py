@@ -1,3 +1,8 @@
+"""
+This module contains custom exception classes for the domain.
+"""
+
+
 class WatchlistFullException(Exception):
     """
     Exception raised when the watchlist is full and a movie cannot be added.

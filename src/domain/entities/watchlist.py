@@ -1,3 +1,7 @@
+""" 
+This module contains the Watchlist class which represents a watchlist of movies.
+"""
+
 from src.domain.entities.movie import Movie
 from src.domain.exceptions import WatchlistFullException
 from src.domain.exceptions import MovieNotFoundException
@@ -17,7 +21,7 @@ class Watchlist:
         Parameters
         ----------
         limit : int, optional
-            maximum number of movies allowed in the watchlist (default is 3)
+            The maximum number of movies allowed in the watchlist (default is 3).
         """
 
         self._movies = []
@@ -31,13 +35,13 @@ class Watchlist:
         Returns
         -------
         tuple
-            the tuple of movies in the watchlist
+            The tuple of movies in the watchlist.
         """
         return tuple(self._movies)
 
     def add_movie(self, movie: Movie):
         """
-        Adds a movie to the watchlist if the limit is not reached
+        Adds a movie to the watchlist if the limit is not reached.
 
         Parameters
         ----------
@@ -68,12 +72,12 @@ class Watchlist:
         Parameters
         ----------
         movie : Movie
-            a movie to remove from the watchlist
+            A movie to remove from the watchlist.
 
         Raises
         ------
         MovieNotFoundException
-            if the movie does not exist in the watchlist
+            If the movie does not exist in the watchlist.
         """
         if movie in self._movies:
             self._movies.remove(movie)
