@@ -36,7 +36,8 @@ def test_watchlist_remove_movie():
 
 def test_watchlist_add_movie_limit_reached():
     """
-    Test case to verify that an exception is raised when the watchlist limit is reached.
+    Test case to verify that an exception is raised when the watchlist limit
+    is reached.
     """
     watchlist = Watchlist(limit=2)
     movie1 = Movie("2001: A Space Odyssey", 1968)
@@ -50,7 +51,8 @@ def test_watchlist_add_movie_limit_reached():
 
 def test_watchlist_remove_nonexistent_movie():
     """
-    Test case to verify that an exception is raised when trying to remove a nonexistent movie from the watchlist.
+    Test case to verify that an exception is raised when trying to remove a
+    nonexistent movie from the watchlist.
     """
     watchlist = Watchlist()
     movie = Movie("Songs from the Second Floor", 2000)
@@ -60,7 +62,8 @@ def test_watchlist_remove_nonexistent_movie():
 
 def test_watchlist_add_existing_movie():
     """
-    Test case to verify that an exception is raised when trying to add an existing movie to the watchlist.
+    Test case to verify that an exception is raised when trying to add an existing
+    movie to the watchlist.
     """
     watchlist = Watchlist()
     movie = Movie("Happy End", 1967)
