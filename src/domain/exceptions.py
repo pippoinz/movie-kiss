@@ -4,6 +4,12 @@ class WatchlistFullException(Exception):
     """
 
 
+class MovieAlreadyInWatchlistException(Exception):
+    """
+    Exception raised when a movie is already in the watchlist.
+    """
+
+
 class MovieNotFoundException(Exception):
     """
     Exception raised when a movie is not found in the watchlist.

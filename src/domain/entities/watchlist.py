@@ -1,7 +1,7 @@
-from typing import List
 from src.domain.entities.movie import Movie
 from src.domain.exceptions import WatchlistFullException
 from src.domain.exceptions import MovieNotFoundException
+from src.domain.exceptions import MovieAlreadyInWatchlistException
 
 
 class Watchlist:
@@ -23,23 +23,41 @@ class Watchlist:
         self._movies = []
         self._limit = limit
 
+    @property
+    def movies(self):
+        """
+        Returns the tuple of movies in the watchlist.
+
+        Returns
+        -------
+        tuple
+            the tuple of movies in the watchlist
+        """
+        return tuple(self._movies)
+
     def add_movie(self, movie: Movie):
         """
-        Adds a movie to the watchlist if the limit is not reached.
+        Adds a movie to the watchlist if the limit is not reached
 
         Parameters
         ----------
         movie : Movie
-            a movie to add to the watchlist
+            The movie object to add to the watchlist.
 
         Raises
         ------
+        MovieAlreadyInWatchlistException
+            If the movie is already in the watchlist.
         WatchlistFullException
-            if the watchlist is full and cannot add more movies
+            If the watchlist is full and cannot add more movies.
         """
-
         if len(self._movies) < self._limit:
-            self._movies.append(movie)
+            if movie not in self._movies:
+                self._movies.append(movie)
+            else:
+                raise MovieAlreadyInWatchlistException(
+                    "Movie is already in the watchlist."
+                )
         else:
             raise WatchlistFullException("Watchlist is full. Cannot add more movies.")
 
@@ -61,14 +79,3 @@ class Watchlist:
             self._movies.remove(movie)
         else:
             raise MovieNotFoundException("Movie does not exist in the watchlist.")
-
-    def get_movies(self) -> List[Movie]:
-        """
-        Returns the list of movies in the watchlist.
-
-        Returns
-        -------
-        List[Movie]
-            the list of movies in the watchlist
-        """
-        return self._movies
