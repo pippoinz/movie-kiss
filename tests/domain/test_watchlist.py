@@ -13,6 +13,14 @@ from src.domain.exceptions import (
 )
 
 
+def test_movie_id():
+    """
+    Test case for the `id` property of the Watchlist class.
+    """
+    watchlist = Watchlist(1)
+    assert watchlist.id == 1
+
+
 def test_watchlist_add_movie():
     """
     Test case to verify the functionality of adding a movie to the watchlist.
