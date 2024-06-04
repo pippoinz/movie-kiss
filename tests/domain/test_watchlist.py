@@ -9,7 +9,7 @@ from src.domain.entities.movie import Movie
 from src.domain.exceptions import (
     WatchlistFullException,
     MovieNotFoundException,
-    MovieAlreadyInWatchlistException,
+    MovieAlreadyExistsException,
 )
 
 
@@ -76,5 +76,5 @@ def test_watchlist_add_existing_movie():
     watchlist = Watchlist(1)
     movie = Movie(1, "Happy End", 1967)
     watchlist.add_movie(movie.id)
-    with pytest.raises(MovieAlreadyInWatchlistException):
+    with pytest.raises(MovieAlreadyExistsException):
         watchlist.add_movie(movie.id)

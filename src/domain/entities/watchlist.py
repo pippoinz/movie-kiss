@@ -6,7 +6,7 @@ from typing import List
 
 from src.domain.exceptions import WatchlistFullException
 from src.domain.exceptions import MovieNotFoundException
-from src.domain.exceptions import MovieAlreadyInWatchlistException
+from src.domain.exceptions import MovieAlreadyExistsException
 
 
 class Watchlist:
@@ -66,7 +66,7 @@ class Watchlist:
 
         Raises
         ------
-        MovieAlreadyInWatchlistException
+        MovieAlreadyExistsException
             If the movie is already in the watchlist.
         WatchlistFullException
             If the watchlist is full and cannot add more movies.
@@ -75,9 +75,7 @@ class Watchlist:
             if movie_id not in self._movies:
                 self._movies.append(movie_id)
             else:
-                raise MovieAlreadyInWatchlistException(
-                    "Movie is already in the watchlist."
-                )
+                raise MovieAlreadyExistsException("Movie is already in the watchlist.")
         else:
             raise WatchlistFullException("Watchlist is full. Cannot add more movies.")
 

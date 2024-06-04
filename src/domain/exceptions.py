@@ -9,13 +9,13 @@ class WatchlistFullException(Exception):
     """
 
 
-class MovieAlreadyInWatchlistException(Exception):
+class MovieAlreadyExistsException(Exception):
     """
-    Exception raised when a movie is already in the watchlist.
+    Exception raised when a movie already exists in a collection.
     """
 
 
 class MovieNotFoundException(Exception):
     """
-    Exception raised when a movie is not found in the watchlist.
+    Exception raised when a movie is not found in a collection.
     """
