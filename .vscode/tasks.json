@@ -7,6 +7,9 @@
             "label": "Run pylint",
             "type": "shell",
             "command": "${workspaceFolder}/.venv/bin/pylint",
+            "windows": {
+                "command": "${workspaceFolder}/.venv/Scripts/pylint"
+            },
             "group": "build",
             "args": [
                 "${workspaceFolder}/src",
@@ -21,6 +24,9 @@
             "label": "Run pytest",
             "type": "shell",
             "command": "${workspaceFolder}/.venv/bin/pytest",
+            "windows": {
+                "command": "${workspaceFolder}/.venv/Scripts/pytest"
+            },
             "group": "test",
             "args": [
                 "--cov=${workspaceFolder}/src",
