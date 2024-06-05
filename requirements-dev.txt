@@ -1,0 +1,12 @@
+# Requirements used to install the necessary packages for development
+
+# Lint
+pylint
+
+# Test
+pytest
+pytest-cov
+
+# Documentation
+sphinx
+sphinx-rtd-theme
