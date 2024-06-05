@@ -4,9 +4,9 @@ repository.
 """
 
 from typing import List
-from domain.interfaces.movie_repositories import WritableMovieRepository
-from domain.entities.movie import Movie
-from domain.exceptions import MovieNotFoundException, MovieAlreadyExistsException
+from src.domain.interfaces.movie_repositories import WritableMovieRepository
+from src.domain.entities.movie import Movie
+from src.domain.exceptions import MovieNotFoundException, MovieAlreadyExistsException
 
 
 class InMemoryMovieRepository(WritableMovieRepository):
