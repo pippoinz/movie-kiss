@@ -8,7 +8,7 @@
 
 import sys, os
 
-sys.path.insert(0, os.path.abspath("../src"))
+sys.path.insert(0, os.path.abspath(".."))
 
 project = "movie-kiss"
 copyright = "2024, Alexandre Leroux"
