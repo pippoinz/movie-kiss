@@ -4,9 +4,11 @@ This module contains the Watchlist class which represents a watchlist of movies.
 
 from typing import List
 
-from src.domain.exceptions import WatchlistFullException
-from src.domain.exceptions import MovieNotFoundException
-from src.domain.exceptions import MovieAlreadyExistsException
+from domain.exceptions import (
+    MovieAlreadyExistsException,
+    MovieNotFoundException,
+    WatchlistFullException,
+)
 
 
 class Watchlist:

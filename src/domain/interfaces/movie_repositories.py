@@ -3,7 +3,7 @@ This module contains the movie repository interfaces.
 """
 
 from abc import ABC, abstractmethod
-from src.domain.entities.movie import Movie
+from domain.entities.movie import Movie
 
 
 class AbstractMovieRepository(ABC):
