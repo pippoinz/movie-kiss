@@ -1,25 +1,22 @@
 """
-This module contains the InMemoryMovieRepository class, which represents an in-memory movie 
+This module contains the DefaultMovieRepository class, which represents a default movie 
 repository.
 """
 
 from typing import List
-from src.domain.interfaces.movie_repositories import WritableMovieRepository
+from src.domain.interfaces.movie_repository import MovieRepository
 from src.domain.entities.movie import Movie
 from src.domain.exceptions import MovieNotFoundException, MovieAlreadyExistsException
 
 
-class InMemoryMovieRepository(WritableMovieRepository):
+class DefaultMovieRepository(MovieRepository):
     """
-    This class represents an in-memory movie repository.
-
-    It implements the WritableMovieRepository interface and provides methods to interact with
-    movies stored in memory.
+    This class represents a default movie repository, with in-memory storage.
     """
 
     def __init__(self):
         """
-        Initializes an instance of the InMemoryMovieRepository class.
+        Initializes an instance of the DefaultMovieRepository class.
 
         It initializes an empty list to store movies.
         """
