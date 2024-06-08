@@ -5,72 +5,73 @@ repository.
 
 from typing import List
 from src.domain.interfaces.movie_repository import MovieRepository
+from src.infrastructure.data_sources.local.movie_local_data_source import (
+    MovieLocalDataSource,
+)
 from src.domain.entities.movie import Movie
-from src.domain.exceptions import MovieNotFoundException, MovieAlreadyExistsException
+from src.domain.exceptions import MovieNotFoundException
+from src.infrastructure.data_sources.movie_model_mappings import (
+    MovieModelMappings as Mappings,
+)
 
 
 class DefaultMovieRepository(MovieRepository):
     """
-    This class represents a default movie repository, with in-memory storage.
+    This class represents a default movie repository, with a local data source.
     """
 
-    def __init__(self):
+    def __init__(self, local_data_source: MovieLocalDataSource):
         """
-        Initializes an instance of the DefaultMovieRepository class.
+        Initializes a DefaultMovieRepository object with the given local data source.
 
-        It initializes an empty list to store movies.
+        Args:
+            local_data_source (MovieLocalDataSource): A movie local data source.
         """
-        self._movies: List[Movie] = []
+        self._local_data_source = local_data_source
 
     def get_movie_by_id(self, movie_id: int) -> Movie:
         """
-        Retrieves a movie by its ID.
+        Get a movie by its ID.
 
         Args:
-            movie_id (int): The ID of the movie to retrieve.
+            movie_id (int): The ID of the movie.
 
         Returns:
-            Movie: The movie with the specified ID.
+            Movie: The movie object.
 
         Raises:
-            MovieNotFoundException: If no movie with the specified ID is found.
+            MovieNotFoundException: If the movie with the given ID is not found.
         """
-        for movie in self._movies:
-            if movie.id == movie_id:
-                return movie
-        raise MovieNotFoundException(f"Movie with ID {movie_id} not found.")
+        local_movie = self._local_data_source.get_movie_by_id(movie_id)
+        if local_movie is None:
+            raise MovieNotFoundException(f"Movie with ID {movie_id} not found")
 
-    def add_movie(self, movie: Movie) -> None:
+        return Mappings.to_entity(local_movie)
+
+    def get_movies_by_title(self, title: str) -> List[Movie]:
         """
-        Adds a movie to the repository.
+        Get movies by title.
 
         Args:
-            movie (Movie): The movie to add to the repository.
+            title (str): The title of the movies.
 
-        Raises:
-            MovieAlreadyExistsException: If a movie with the same ID already exists in the
-            repository.
+        Returns:
+            List[Movie]: A list of movie objects.
         """
-        if any(existing_movie.id == movie.id for existing_movie in self._movies):
-            raise MovieAlreadyExistsException(
-                f"Movie with ID {movie.id} already exists in the repository."
-            )
+        local_movies = self._local_data_source.get_movies_by_title(title)
 
-        self._movies.append(movie)
+        return [Mappings.to_entity(local_movie) for local_movie in local_movies]
 
-    def remove_movie(self, movie: Movie) -> None:
+    def get_movies_by_release_year(self, release_year: int) -> List[Movie]:
         """
-        Removes a movie from the repository.
+        Get movies by release year.
 
         Args:
-            movie (Movie): The movie to remove from the repository.
+            release_year (int): The release year of the movies.
 
-        Raises:
-            MovieNotFoundException: If the movie is not found in the repository.
+        Returns:
+            List[Movie]: A list of movie objects.
         """
-        if movie not in self._movies:
-            raise MovieNotFoundException(
-                f"Movie with ID {movie.id} not found in the repository."
-            )
+        local_movies = self._local_data_source.get_movies_by_release_year(release_year)
 
-        self._movies.remove(movie)
+        return [Mappings.to_entity(local_movie) for local_movie in local_movies]

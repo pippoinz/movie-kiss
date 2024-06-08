@@ -1,20 +1,18 @@
-"""
-This module contains the movie repository interface.
-"""
+""" This module contains the MovieLocalDataSource abstract base class. """
 
 from abc import ABC, abstractmethod
-from src.domain.entities.movie import Movie
+from src.infrastructure.data_sources.local.local_movie import LocalMovie
 
 
-class MovieRepository(ABC):
-    """An abstract base class for movie repositories.
+class MovieLocalDataSource(ABC):
+    """An abstract base class for movie local data sources.
 
-    This class defines the interface for movie repositories. Subclasses should implement the
-    methods defined here.
+    This class defines the interface for movie local data sources.
+    Subclasses should implement the methods defined here.
     """
 
     @abstractmethod
-    def get_movie_by_id(self, movie_id: int) -> Movie:
+    def get_movie_by_id(self, movie_id: int) -> LocalMovie:
         """Get a movie by its ID.
 
         Args:
@@ -25,7 +23,7 @@ class MovieRepository(ABC):
         """
 
     @abstractmethod
-    def get_movies_by_title(self, title: str) -> list[Movie]:
+    def get_movies_by_title(self, title: str) -> list[LocalMovie]:
         """Get movies by title.
 
         Args:
@@ -36,7 +34,7 @@ class MovieRepository(ABC):
         """
 
     @abstractmethod
-    def get_movies_by_release_year(self, release_year: int) -> list[Movie]:
+    def get_movies_by_release_year(self, release_year: int) -> list[LocalMovie]:
         """Get movies by release year.
 
         Args:
