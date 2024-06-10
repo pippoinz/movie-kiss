@@ -4,12 +4,11 @@ repository.
 """
 
 from typing import List
+from src.domain.entities.movie import Movie
 from src.domain.interfaces.movie_repository import MovieRepository
 from src.infrastructure.data_sources.local.movie_local_data_source import (
     MovieLocalDataSource,
 )
-from src.domain.entities.movie import Movie
-from src.domain.exceptions import MovieNotFoundException
 from src.infrastructure.data_sources.movie_model_mappings import (
     MovieModelMappings as Mappings,
 )
@@ -43,8 +42,6 @@ class DefaultMovieRepository(MovieRepository):
             MovieNotFoundException: If the movie with the given ID is not found.
         """
         local_movie = self._local_data_source.get_movie_by_id(movie_id)
-        if local_movie is None:
-            raise MovieNotFoundException(f"Movie with ID {movie_id} not found")
 
         return Mappings.to_entity(local_movie)
 

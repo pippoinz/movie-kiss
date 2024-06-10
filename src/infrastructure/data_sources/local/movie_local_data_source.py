@@ -20,6 +20,9 @@ class MovieLocalDataSource(ABC):
 
         Returns:
             Movie: The movie object.
+
+        Raises:
+            MovieNotFoundException: If the movie with the given ID is not found.
         """
 
     @abstractmethod
