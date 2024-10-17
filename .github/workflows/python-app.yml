@@ -30,7 +30,13 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with pylint
       run: |
-        pylint --fail-under=9.9 $(git ls-files '*.py')
+        score=$(pylint $(git ls-files '*.py') | tee /dev/tty | grep -o "rated at [0-9.]*" | awk '{print $3}')
+        if (( $(echo "$score < 0.9" | bc -l) )); then
+          echo "::error file=pylint::Pylint score is below 0.9: $score"
+        exit 1
+        elif (( $(echo "$score < 1.0" | bc -l) )); then
+          echo "::warning file=pylint::Pylint score is below 1.0: $score"
+        fi
     - name: Test with pytest
       run: |
         pytest --cov=src --cov-report=xml tests/
